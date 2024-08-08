@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       setState(() {
         _currentIndex = (_currentIndex + 1) % _backgroundImages.length;
       });
@@ -43,8 +43,8 @@ class _LoginState extends State<Login> {
               placeholder: MemoryImage(kTransparentImage),
               image: AssetImage(_backgroundImages[_currentIndex]),
               fit: BoxFit.cover,
-              fadeInDuration: Duration(seconds: 1),
-              fadeOutDuration: Duration(seconds: 1),
+              fadeInDuration:  const Duration(seconds: 1),
+              fadeOutDuration:  const Duration(seconds: 1),
             ),
           ),
           Center(
@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
                       clipBehavior: Clip.none,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(15),
@@ -67,14 +67,14 @@ class _LoginState extends State<Login> {
                                 color: Colors.black.withOpacity(0.2),
                                 spreadRadius: 5,
                                 blurRadius: 7,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              SizedBox(height: 50), // Space for the image
+                              const SizedBox(height: 50), // Space for the image
                               "Login"
                                   .text
                                   .bold
@@ -83,15 +83,23 @@ class _LoginState extends State<Login> {
                                   .make(),
                               20.heightBox,
                               TextField(
+                                cursorColor: MyColors.grey,
                                 decoration: InputDecoration(
                                   hintText: 'Username',
                                   filled: true,
                                   prefixIcon: const Icon(Icons.person),
+                                  prefixIconColor: MyColors.grey,
                                   fillColor: Colors.white.withOpacity(0.5),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: MyColors.grey,
+                                    ),
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide(
-                                      color: MyColors.black.withOpacity(0.5),
+                                      color: MyColors.grey,
                                     ),
                                   ),
                                 ),
@@ -99,38 +107,49 @@ class _LoginState extends State<Login> {
                               20.heightBox,
                               TextField(
                                 obscureText: true,
+                                cursorColor: MyColors.grey,
                                 decoration: InputDecoration(
                                   hintText: 'Password',
                                   prefixIcon: const Icon(Icons.lock),
+                                  prefixIconColor: MyColors.grey,
                                   filled: true,
                                   fillColor: Colors.white.withOpacity(0.5),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: MyColors.grey,
+                                    ),
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide(
-                                      color: MyColors.black.withOpacity(0.5),
+                                      color: MyColors.grey,
                                     ),
                                   ),
                                 ),
                               ),
                               50.heightBox,
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Handle login
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: MyColors.primaryColor,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 15),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                              FadeAnimation(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Handle login
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: MyColors.primaryColor,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 50, vertical: 15),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    minimumSize: const Size(double.infinity, 50),
                                   ),
-                                  minimumSize: Size(double.infinity, 50),
+                                  child: "Login"
+                                      .text
+                                      .white
+                                      .size(20)
+                                      .align(TextAlign.center)
+                                      .make(),
                                 ),
-                                child: "Login"
-                                    .text
-                                    .white
-                                    .align(TextAlign.center)
-                                    .make(),
                               ),
                             ],
                           ),

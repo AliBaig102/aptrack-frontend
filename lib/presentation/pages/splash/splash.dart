@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.primaryColor,
+      backgroundColor: MyColors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -46,16 +46,17 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               endOffset: const Offset(0, 0),
               child: Image.asset(
                 "assets/images/aptrack-logo.png",
-                width: 200,
-                height: 200,
+                width: 300,
+                height: 300,
               ),
             ),
             const SizedBox(height: 20),
             SizedBox(
               width: 200,
+              height: 5,
               child: LinearProgressIndicator(
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                backgroundColor: Colors.grey,
+                valueColor: const AlwaysStoppedAnimation<Color>(MyColors.primaryColor),
+                backgroundColor: MyColors.grey,
                 value: _controller
                     .value, // Update progress based on AnimationController's value
               ),
