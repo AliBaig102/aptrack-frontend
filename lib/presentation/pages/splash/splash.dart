@@ -46,16 +46,17 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               endOffset: const Offset(0, 0),
               child: Image.asset(
                 "assets/images/aptrack-logo.png",
-                width: 300,
-                height: 300,
+                width: 300.w,
+                height: 300.h,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             SizedBox(
               width: 200,
-              height: 5,
+              height: 5.h,
               child: LinearProgressIndicator(
-                valueColor: const AlwaysStoppedAnimation<Color>(MyColors.primaryColor),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(MyColors.primaryColor),
                 backgroundColor: MyColors.grey,
                 value: _controller
                     .value, // Update progress based on AnimationController's value
