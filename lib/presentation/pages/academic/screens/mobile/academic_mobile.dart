@@ -1,8 +1,13 @@
-part of 'dashboard_mobile_imports.dart';
+part of 'academic_mobile_imports.dart';
 
-class DashboardMobile extends StatelessWidget {
-  const DashboardMobile({super.key});
+class AcademicMobile extends StatefulWidget {
+  const AcademicMobile({super.key});
 
+  @override
+  State<AcademicMobile> createState() => _AcademicMobileState();
+}
+
+class _AcademicMobileState extends State<AcademicMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +17,7 @@ class DashboardMobile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Header(title: "Welcome to Aptrack"),
+            const Header(title: "Welcome to Aptrack Academic"),
             const SizedBox(height: 16),
             // Grid Items
             Expanded(
@@ -23,32 +28,28 @@ class DashboardMobile extends StatelessWidget {
                 children: [
                   _buildGridItem(
                     context,
-                    title: "Center",
-                    subtitle: "Inquirys ,Enrollments",
-                    icon: Icons.book,
+                    title: "Attendance",
+                    subtitle: "Session Wise Attendance",
+                    icon: Icons.person,
+                    color: MyColors.black,
+                  ),
+                  _buildGridItem(context,
+                      title: "Batch",
+                      subtitle: "Create Batch ,View Batch",
+                      icon: Icons.group,
+                      color: MyColors.black,
+                      onTab: () {}),
+                  _buildGridItem(
+                    context,
+                    title: "Attendence",
+                    subtitle: "Student Wise Attendence",
+                    icon: Icons.person,
                     color: MyColors.black,
                   ),
                   _buildGridItem(
                     context,
-                    title: "Academic",
-                    subtitle: "Attendence ,Batch",
-                    icon: Icons.school,
-                    color: MyColors.black,
-                    onTab: () {
-                      context.router.push(const AcademicRoute());
-                    },
-                  ),
-                  _buildGridItem(
-                    context,
-                    title: "Examination",
-                    subtitle: "Practical Marks ,Final Marks",
-                    icon: Icons.assignment,
-                    color: MyColors.black,
-                  ),
-                  _buildGridItem(
-                    context,
-                    title: "Employees",
-                    subtitle: "Add Employee ,View Employee",
+                    title: "Session",
+                    subtitle: "Add Extra Session",
                     icon: Icons.person,
                     color: MyColors.black,
                   ),
