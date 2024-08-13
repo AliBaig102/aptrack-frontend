@@ -33,12 +33,16 @@ class _AcademicMobileState extends State<AcademicMobile> {
                     icon: Icons.person,
                     color: MyColors.black,
                   ),
-                  _buildGridItem(context,
-                      title: "Batch",
-                      subtitle: "Create Batch ,View Batch",
-                      icon: Icons.group,
-                      color: MyColors.black,
-                      onTab: () {}),
+                  _buildGridItem(
+                    context,
+                    title: "Batch",
+                    subtitle: "Create Batch ,View Batch",
+                    icon: Icons.group,
+                    color: MyColors.black,
+                    onTab: () {
+                      context.router.push(const BatchRoute());
+                    },
+                  ),
                   _buildGridItem(
                     context,
                     title: "Attendence",
