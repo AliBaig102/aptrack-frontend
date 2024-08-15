@@ -1,19 +1,26 @@
+// part of 'components_imports.dart';
+
 import 'package:aptrack/core/constants/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Header extends StatelessWidget {
   final String title;
-  const Header({super.key, required this.title});
+  final Widget breadcrumb;
+  const Header({super.key, required this.title, required this.breadcrumb});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 20.w,
+        ),
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 24,
+          style: TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.bold,
             color: MyColors.black,
           ),
@@ -25,23 +32,15 @@ class Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // Breadcrumb
-            const Row(
-              children: [
-                Text(
-                  "Home",
-                  style: TextStyle(color: MyColors.black),
-                ),
-                Icon(Icons.chevron_right, color: MyColors.black),
-                Text(
-                  "Dashboard",
-                  style: TextStyle(color: MyColors.black),
-                ),
-              ],
-            ),
+            breadcrumb,
 
             // Settings Icon with Dropdown
             PopupMenuButton<String>(
-              icon: const Icon(Icons.settings, color: MyColors.black),
+              icon: Icon(
+                Icons.settings,
+                color: MyColors.black,
+                size: 28.sp,
+              ),
               color: MyColors.white,
               elevation: 8,
               onSelected: (String result) {

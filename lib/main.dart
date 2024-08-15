@@ -13,20 +13,12 @@ class MyApp extends StatelessWidget {
   final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(460, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      // Use builder only if you need to use library outside ScreenUtilInit context
-      builder: (_, child) {
-        return MaterialApp.router(
-          title: MyStrings.appTitle,
-          debugShowCheckedModeBanner: false,
-          theme: AppThemes.light,
-          darkTheme: AppThemes.dark,
-          routerConfig: _appRouter.config(),
-        );
-      },
+    return MaterialApp.router(
+      title: MyStrings.appTitle,
+      debugShowCheckedModeBanner: false,
+      theme: AppThemes.light,
+      darkTheme: AppThemes.dark,
+      routerConfig: _appRouter.config(),
     );
   }
 }

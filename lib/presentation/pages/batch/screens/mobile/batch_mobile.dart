@@ -55,269 +55,246 @@ class _BatchMobileState extends State<BatchMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Batch"),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              showDialog(context: context, builder: (_) => _AddPopup());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: MyColors.primaryColor,
-              foregroundColor: MyColors.white,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
-              ),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.add, size: 20),
-                Text(" Add"),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          ElevatedButton(
-            onPressed: () {
-              showDialog(context: context, builder: (_) => _ViewPopup());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: MyColors.primaryColor,
-              foregroundColor: MyColors.white,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
-              ),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.view_agenda_outlined, size: 20),
-                Text(" View"),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0), // Adjusted padding for mobile
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Title
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Card(
-                margin: EdgeInsets.all(10),
-                elevation: 30,
-                shadowColor: MyColors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+    final double width = MediaQuery.of(context).size.width;
+    const double minSize = MySizes.minMobileScreenSize;
+
+    return ScreenUtilInit(
+        designSize: const Size(MySizes.maxMobileScreenSize, minSize * 1.6),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          return Scaffold(
+            backgroundColor: MyColors.white,
+            appBar: AppBar(
+              backgroundColor: MyColors.white,
+              title: Text(
+                "Batch",
+                style: TextStyle(
+                  color: MyColors.black,
+                  fontSize: 24.sp,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Column(
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (_) => _AddPopup());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MyColors.primaryColor,
+                    foregroundColor: MyColors.white,
+                    shape: const StadiumBorder(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 10.w,
+                    ),
+                  ),
+                  child: Row(
                     children: [
-                      const Text(
-                        "Search Student",
-                        textAlign: TextAlign.center,
+                      Icon(Icons.add, size: 20.sp),
+                      Text(
+                        " Add",
+                        style: TextStyle(fontSize: 16.sp),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (_) => _ViewPopup());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MyColors.primaryColor,
+                    foregroundColor: MyColors.white,
+                    shape: const StadiumBorder(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 10.w,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.view_agenda_outlined, size: 20.w),
+                      Text(" View", style: TextStyle(fontSize: 16.sp)),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+              ],
+            ),
+            body: Padding(
+              padding: EdgeInsets.all(20.0.w),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Card(
+                      margin: EdgeInsets.all(20.w),
+                      color: MyColors.white,
+                      elevation: 20,
+                      shadowColor: MyColors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.w),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(18.0.w),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Search Student",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 26.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            MyInput(
+                              hintText: "ID",
+                              prefixIcon: Icons.person,
+                              color: MyColors.grey,
+                              controller: TextEditingController(),
+                            ),
+                            const SizedBox(height: 10),
+                            MyInput(
+                              hintText: "First Name",
+                              prefixIcon: Icons.person,
+                              color: MyColors.grey,
+                              controller: TextEditingController(),
+                            ),
+                            const SizedBox(height: 10),
+                            MyInput(
+                              hintText: "Last Name",
+                              prefixIcon: Icons.person,
+                              color: MyColors.grey,
+                              controller: TextEditingController(),
+                            ),
+                            const SizedBox(height: 10),
+                            FadeAnimation(
+                              child: ElevatedButton(
+                                onPressed: isLoading ? null : _searchStudents,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: MyColors.primaryColor,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 50.w,
+                                    vertical: 5.w,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.w),
+                                  ),
+                                  minimumSize: Size(double.infinity, 30.h),
+                                ),
+                                child: isLoading
+                                    ? const CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                MyColors.black),
+                                      )
+                                    : Text(
+                                        "Search",
+                                        style: TextStyle(
+                                            color: MyColors.black,
+                                            fontSize: 18.sp),
+                                      ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (students.isNotEmpty) ...[
+                      Text(
+                        "Student Results:",
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: 18.sp, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 10),
-
-                      // Search Form
-                      TextField(
-                        cursorColor: MyColors.grey,
-                        decoration: InputDecoration(
-                          hintText: 'ID',
-                          filled: true,
-                          prefixIcon: const Icon(Icons.person),
-                          prefixIconColor: MyColors.grey,
-                          fillColor: Colors.white.withOpacity(0.5),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
+                      const SizedBox(height: 8),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          columnSpacing: 10.w,
+                          columns: [
+                            DataColumn(
+                              label: Checkbox(
+                                value: selectAll,
+                                onChanged: _toggleSelectAll,
+                              ),
                             ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      TextField(
-                        cursorColor: MyColors.grey,
-                        decoration: InputDecoration(
-                          hintText: 'First Name',
-                          filled: true,
-                          prefixIcon: const Icon(Icons.person),
-                          prefixIconColor: MyColors.grey,
-                          fillColor: Colors.white.withOpacity(0.5),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      TextField(
-                        cursorColor: MyColors.grey,
-                        decoration: InputDecoration(
-                          hintText: 'Last Name',
-                          filled: true,
-                          prefixIcon: const Icon(Icons.person),
-                          prefixIconColor: MyColors.grey,
-                          fillColor: Colors.white.withOpacity(0.5),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: MyColors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 12),
-
-                      // Search Button
-                      FadeAnimation(
-                        child: ElevatedButton(
-                          onPressed: isLoading ? null : _searchStudents,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: MyColors.primaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
-                          child: isLoading
-                              ? const CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                      MyColors.black),
-                                )
-                              : const Text("Search",
-                                  style: TextStyle(
-                                      color: MyColors.black, fontSize: 18)),
+                            const DataColumn(label: Text("ID")),
+                            const DataColumn(label: Text("First Name")),
+                            const DataColumn(label: Text("Last Name")),
+                            const DataColumn(label: Text("Current Batch")),
+                            const DataColumn(label: Text("Select Batch")),
+                          ],
+                          rows: students
+                              .map(
+                                (student) => DataRow(
+                                  selected: student["selected"] ?? false,
+                                  cells: [
+                                    DataCell(
+                                      Checkbox(
+                                        value: student["selected"],
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            student["selected"] = value!;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    DataCell(Text(student["id"]!)),
+                                    DataCell(Text(student["firstName"]!)),
+                                    DataCell(Text(student["lastName"]!)),
+                                    DataCell(Text(student["batch"]!)),
+                                    DataCell(
+                                      DropdownButton<String>(
+                                        value: student["batch"],
+                                        items: batches.map((String batch) {
+                                          return DropdownMenuItem<String>(
+                                            value: batch,
+                                            child: Text(batch),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newBatch) {
+                                          setState(() {
+                                            student["batch"] = newBatch!;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                              .toList(),
                         ),
                       ),
                       const SizedBox(height: 12),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle save action
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.primaryColor,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 50.w,
+                            vertical: 5.w,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.w),
+                          ),
+                          minimumSize: Size(double.infinity, 30.h),
+                        ),
+                        child: const Text("Save",
+                            style:
+                                TextStyle(color: MyColors.black, fontSize: 18)),
+                      ),
                     ],
-                  ),
+                  ],
                 ),
               ),
             ),
-
-            // Student Table
-            if (students.isNotEmpty) ...[
-              const Text(
-                "Student Results:",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columnSpacing: 20, // Adjusted column spacing for mobile
-                    columns: [
-                      DataColumn(
-                        label: Checkbox(
-                          value: selectAll,
-                          onChanged: _toggleSelectAll,
-                        ),
-                      ),
-                      const DataColumn(label: Text("ID")),
-                      const DataColumn(label: Text("First Name")),
-                      const DataColumn(label: Text("Last Name")),
-                      const DataColumn(label: Text("Current Batch")),
-                      const DataColumn(label: Text("Select Batch")),
-                    ],
-                    rows: students
-                        .map(
-                          (student) => DataRow(
-                            selected: student["selected"] ?? false,
-                            cells: [
-                              DataCell(
-                                Checkbox(
-                                  value: student["selected"],
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      student["selected"] = value!;
-                                    });
-                                  },
-                                ),
-                              ),
-                              DataCell(Text(student["id"]!)),
-                              DataCell(Text(student["firstName"]!)),
-                              DataCell(Text(student["lastName"]!)),
-                              DataCell(Text(student["batch"]!)),
-                              DataCell(
-                                DropdownButton<String>(
-                                  value: student["batch"],
-                                  items: batches.map((String batch) {
-                                    return DropdownMenuItem<String>(
-                                      value: batch,
-                                      child: Text(batch),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newBatch) {
-                                    setState(() {
-                                      student["batch"] = newBatch!;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              // Save Button
-              ElevatedButton(
-                onPressed: () {
-                  // Handle save action
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.green,
-                ),
-                child: const Text("Save", style: TextStyle(fontSize: 18)),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }
 
@@ -332,35 +309,20 @@ class _AddPopupState extends State<_AddPopup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: MyColors.white,
       title: const Text('Add Batch'),
       content: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextFormField(
-              cursorColor: MyColors.grey,
-              decoration: InputDecoration(
-                hintText: 'Batch Code',
-                filled: true,
-                prefixIcon: const Icon(Icons.group),
-                prefixIconColor: MyColors.grey,
-                fillColor: Colors.white.withOpacity(0.5),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: MyColors.grey,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: MyColors.grey,
-                  ),
-                ),
-              ),
-            ),
             const SizedBox(height: 10),
+            MyInput(
+              hintText: "Batch Code",
+              prefixIcon: Icons.group,
+              color: MyColors.grey,
+              controller: TextEditingController(),
+            )
           ],
         ),
       ),
@@ -370,22 +332,25 @@ class _AddPopupState extends State<_AddPopup> {
             backgroundColor: MyColors.red,
             foregroundColor: MyColors.white,
             shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 10.w,
             ),
           ),
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: Text(
+            'Cancel',
+            style: TextStyle(fontSize: 15.sp),
+          ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.black,
             foregroundColor: MyColors.white,
             shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 10.w,
             ),
           ),
           onPressed: () {
@@ -394,7 +359,10 @@ class _AddPopupState extends State<_AddPopup> {
               Navigator.of(context).pop();
             }
           },
-          child: const Text('Add'),
+          child: Text(
+            'Add',
+            style: TextStyle(fontSize: 15.sp),
+          ),
         ),
       ],
     );
@@ -444,102 +412,143 @@ class _ViewPopupState extends State<_ViewPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('View Batches'),
-      content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DataTable(
-              columnSpacing: 12,
-              horizontalMargin: 12,
-              columns: [
-                DataColumn(
-                  label: Checkbox(
-                    value: _allSelected,
-                    onChanged: _toggleSelectAll,
+    return ScreenUtilInit(
+      designSize: const Size(460, 736),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        final double width = MediaQuery.of(context).size.width;
+        return AlertDialog(
+          title: Text(
+            'View Batches',
+            style: TextStyle(fontSize: 20.sp),
+          ),
+          content: SingleChildScrollView(
+            child: SizedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  DataTable(
+                    columnSpacing: 12.w,
+                    horizontalMargin: 12.w,
+                    columns: [
+                      DataColumn(
+                        label: Checkbox(
+                          value: _allSelected,
+                          onChanged: _toggleSelectAll,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Code',
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Date',
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Edit',
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                      _students.length,
+                      (index) => DataRow(
+                        selected: _selectedIndices.contains(index),
+                        cells: [
+                          DataCell(
+                            Checkbox(
+                              value: _selectedIndices.contains(index),
+                              onChanged: (bool? value) {
+                                _toggleSelection(index, value);
+                              },
+                            ),
+                          ),
+                          DataCell(Text(
+                            _students[index]["batchCode"] ?? '',
+                            style: TextStyle(fontSize: 12.sp),
+                          )),
+                          DataCell(Text(
+                            _students[index]["createDate"] ?? '',
+                            style: TextStyle(fontSize: 12.sp),
+                          )),
+                          DataCell(
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor:
+                                    MyColors.blue, // Adjust the text color
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 10.h,
+                                ),
+                              ),
+                              child: Text(
+                                'Edit',
+                                style: TextStyle(fontSize: 16.sp),
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => _EditPopup(
+                                    value: _students[index]["batchCode"] ?? '',
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            if (_selectedIndices.isNotEmpty)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.red,
+                  foregroundColor: MyColors.white,
+                  shape: const StadiumBorder(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 10.h,
                   ),
                 ),
-                const DataColumn(label: Text('Batch Code')),
-                const DataColumn(label: Text('Create Date')),
-                const DataColumn(label: Text('Edit')),
-              ],
-              rows: List<DataRow>.generate(
-                _students.length,
-                (index) => DataRow(
-                  selected: _selectedIndices.contains(index),
-                  cells: [
-                    DataCell(
-                      Checkbox(
-                        value: _selectedIndices.contains(index),
-                        onChanged: (bool? value) {
-                          _toggleSelection(index, value);
-                        },
-                      ),
-                    ),
-                    DataCell(Text(_students[index]["batchCode"] ?? '')),
-                    DataCell(Text(_students[index]["createDate"] ?? '')),
-                    DataCell(
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: MyColors.blue,
-                          foregroundColor: MyColors.white,
-                          shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                        ),
-                        child: const Text('Edit'),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (_) => _EditPopup(
-                                    value: _students[index]["batchCode"] ?? '',
-                                  ));
-                        },
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  'Delete',
+                  style: TextStyle(fontSize: 16.sp),
                 ),
+                onPressed: () {
+                  // Delete logic here
+                },
+              ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: MyColors.black,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 10.h,
+                ),
+              ),
+              child: Text(
+                'Close',
+                style: TextStyle(fontSize: 16.sp),
               ),
             ),
           ],
-        ),
-      ),
-      actions: [
-        if (_selectedIndices.isNotEmpty)
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: MyColors.red,
-              foregroundColor: MyColors.white,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
-              ),
-            ),
-            child: const Text('Delete'),
-            onPressed: () {
-              // Delete logic here
-            },
-          ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: MyColors.black,
-            foregroundColor: MyColors.white,
-            shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-          ),
-          child: const Text('Close'),
-        ),
-      ],
+        );
+      },
     );
   }
 }
