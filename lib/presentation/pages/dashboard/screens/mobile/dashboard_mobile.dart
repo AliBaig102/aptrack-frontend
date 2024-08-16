@@ -23,7 +23,7 @@ class DashboardMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Header(
-                    title: "Welcome to Aptrack",
+                    title: MyStrings.welcomeMessage,
                     breadcrumb: Row(
                       children: [
                         Text(
@@ -38,11 +38,25 @@ class DashboardMobile extends StatelessWidget {
                           color: MyColors.black,
                           size: 16.sp,
                         ),
-                        Text(
-                          "Dashboard",
-                          style: TextStyle(
-                            color: MyColors.black,
-                            fontSize: 16.sp,
+                        TextButton(
+                          onPressed: () {
+                            context.router.push(const BatchRoute());
+                          },
+                          style: TextButton.styleFrom(
+                            overlayColor: Colors.transparent,
+                            elevation: 4,
+                            backgroundColor: MyColors.white,
+                            shadowColor: MyColors.black,
+                            // side: const BorderSide(
+                            //   color: MyColors.primaryColor,
+                            // ),
+                          ),
+                          child: Text(
+                            "Dashboard",
+                            style: TextStyle(
+                              color: MyColors.black,
+                              fontSize: 16.sp,
+                            ),
                           ),
                         ),
                       ],
@@ -87,6 +101,20 @@ class DashboardMobile extends StatelessWidget {
                           title: "Employees",
                           subtitle: "Add Employee ,View Employee",
                           icon: Icons.person,
+                          color: MyColors.black,
+                        ),
+                        _buildGridItem(
+                          context,
+                          title: "Courses",
+                          subtitle: "Add Courses ,View Courses",
+                          icon: Icons.golf_course,
+                          color: MyColors.black,
+                        ),
+                        _buildGridItem(
+                          context,
+                          title: "Accounts",
+                          subtitle: "Add ,View Accounts",
+                          icon: Icons.account_balance,
                           color: MyColors.black,
                         ),
                         // _buildGridItem(

@@ -28,7 +28,7 @@ class _AcademicMobileState extends State<AcademicMobile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Header(
-                  title: "Welcome to Aptrack",
+                  title: MyStrings.welcomeMessage,
                   breadcrumb: Row(
                     children: [
                       Text(
@@ -38,17 +38,20 @@ class _AcademicMobileState extends State<AcademicMobile> {
                           fontSize: 16.sp,
                         ),
                       ),
-                      Icon(
-                        Icons.chevron_right,
-                        color: MyColors.black,
+                      MyBreadcrumb(
+                        onPressed: () {
+                          return context.router.push(const DashboardRoute());
+                        },
+                        title: "Dashboard",
                         size: 16.sp,
                       ),
-                      Text(
-                        "Dashboard",
-                        style: TextStyle(
-                          color: MyColors.black,
-                          fontSize: 16.sp,
-                        ),
+                      MyBreadcrumb(
+                        onPressed: () {
+                          return context.router.push(const AcademicRoute());
+                        },
+                        title: "Academic",
+                        size: 16.sp,
+                        isActive: true,
                       ),
                     ],
                   ),

@@ -133,6 +133,7 @@ class _LoginState extends State<Login> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     // Handle login
+                                    context.router.push(const DashboardRoute());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: MyColors.primaryColor,

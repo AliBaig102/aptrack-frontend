@@ -65,69 +65,131 @@ class _BatchMobileState extends State<BatchMobile> {
         builder: (_, child) {
           return Scaffold(
             backgroundColor: MyColors.white,
-            appBar: AppBar(
-              backgroundColor: MyColors.white,
-              title: Text(
-                "Batch",
-                style: TextStyle(
-                  color: MyColors.black,
-                  fontSize: 24.sp,
-                ),
+            floatingActionButton:
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              FloatingActionButton(
+                backgroundColor: MyColors.primaryColor,
+                foregroundColor: MyColors.white,
+                shape: const StadiumBorder(),
+                tooltip: "Create new Batch",
+                onPressed: () {
+                  showDialog(context: context, builder: (_) => _AddPopup());
+                },
+                child: Icon(Icons.add, color: MyColors.white, size: 20.sp),
               ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: (_) => _AddPopup());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.primaryColor,
-                    foregroundColor: MyColors.white,
-                    shape: const StadiumBorder(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 10.w,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.add, size: 20.sp),
-                      Text(
-                        " Add",
-                        style: TextStyle(fontSize: 16.sp),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(context: context, builder: (_) => _ViewPopup());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.primaryColor,
-                    foregroundColor: MyColors.white,
-                    shape: const StadiumBorder(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 10.w,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.view_agenda_outlined, size: 20.w),
-                      Text(" View", style: TextStyle(fontSize: 16.sp)),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 10),
-              ],
-            ),
+              const SizedBox(width: 10),
+              FloatingActionButton(
+                backgroundColor: MyColors.primaryColor,
+                foregroundColor: MyColors.white,
+                shape: const StadiumBorder(),
+                tooltip: "View Batches",
+                onPressed: () {
+                  showDialog(context: context, builder: (_) => _ViewPopup());
+                },
+                child: Icon(Icons.remove_red_eye,
+                    color: MyColors.white, size: 20.sp),
+              )
+            ]),
+            // appBar: AppBar(
+            //   backgroundColor: MyColors.white,
+            //   title: Text(
+            //     "Batch",
+            //     style: TextStyle(
+            //       color: MyColors.black,
+            //       fontSize: 24.sp,
+            //     ),
+            //   ),
+            //   actions: [
+            //     ElevatedButton(
+            //       onPressed: () {
+            //         showDialog(context: context, builder: (_) => _AddPopup());
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: MyColors.primaryColor,
+            //         foregroundColor: MyColors.white,
+            //         shape: const StadiumBorder(),
+            //         padding: EdgeInsets.symmetric(
+            //           horizontal: 20.w,
+            //           vertical: 10.w,
+            //         ),
+            //       ),
+            //       child: Row(
+            //         children: [
+            //           Icon(Icons.add, size: 20.sp),
+            //           Text(
+            //             " Add",
+            //             style: TextStyle(fontSize: 16.sp),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     const SizedBox(width: 10),
+            //     ElevatedButton(
+            //       onPressed: () {
+            //         showDialog(context: context, builder: (_) => _ViewPopup());
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: MyColors.primaryColor,
+            //         foregroundColor: MyColors.white,
+            //         shape: const StadiumBorder(),
+            //         padding: EdgeInsets.symmetric(
+            //           horizontal: 20.w,
+            //           vertical: 10.w,
+            //         ),
+            //       ),
+            //       child: Row(
+            //         children: [
+            //           Icon(Icons.view_agenda_outlined, size: 20.w),
+            //           Text(" View", style: TextStyle(fontSize: 16.sp)),
+            //         ],
+            //       ),
+            //     ),
+            //     const SizedBox(width: 10),
+            //   ],
+            // ),
             body: Padding(
-              padding: EdgeInsets.all(20.0.w),
+              padding: EdgeInsets.all(16.0.w),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Header(
+                      title: MyStrings.welcomeMessage,
+                      breadcrumb: Row(
+                        children: [
+                          Text(
+                            "Home",
+                            style: TextStyle(
+                              color: MyColors.black,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          MyBreadcrumb(
+                            onPressed: () {
+                              return context.router
+                                  .push(const DashboardRoute());
+                            },
+                            title: "Dashboard",
+                            size: 16.sp,
+                          ),
+                          MyBreadcrumb(
+                            onPressed: () {
+                              return context.router.push(const AcademicRoute());
+                            },
+                            title: "Academic",
+                            size: 16.sp,
+                          ),
+                          MyBreadcrumb(
+                            onPressed: () {
+                              return context.router.push(const BatchRoute());
+                            },
+                            title: "Batch",
+                            size: 16.sp,
+                            isActive: true,
+                          ),
+                        ],
+                      ),
+                    ),
                     Card(
                       margin: EdgeInsets.all(20.w),
                       color: MyColors.white,
@@ -182,7 +244,7 @@ class _BatchMobileState extends State<BatchMobile> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.w),
                                   ),
-                                  minimumSize: Size(double.infinity, 30.h),
+                                  minimumSize: Size(double.infinity, 40.h),
                                 ),
                                 child: isLoading
                                     ? const CircularProgressIndicator(
