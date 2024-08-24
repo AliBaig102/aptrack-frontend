@@ -33,31 +33,13 @@ class DashboardMobile extends StatelessWidget {
                             fontSize: 16.sp,
                           ),
                         ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: MyColors.black,
-                          size: 16.sp,
-                        ),
-                        TextButton(
+                        MyBreadcrumb(
+                          title: "Dashboard",
                           onPressed: () {
-                            context.router.push(const BatchRoute());
+                            return context.router.push(const DashboardRoute());
                           },
-                          style: TextButton.styleFrom(
-                            overlayColor: Colors.transparent,
-                            elevation: 4,
-                            backgroundColor: MyColors.white,
-                            shadowColor: MyColors.black,
-                            // side: const BorderSide(
-                            //   color: MyColors.primaryColor,
-                            // ),
-                          ),
-                          child: Text(
-                            "Dashboard",
-                            style: TextStyle(
-                              color: MyColors.black,
-                              fontSize: 16.sp,
-                            ),
-                          ),
+                          size: 14.sp,
+                          isActive: true,
                         ),
                       ],
                     ),
@@ -75,14 +57,14 @@ class DashboardMobile extends StatelessWidget {
                         _buildGridItem(
                           context,
                           title: "Center",
-                          subtitle: "Inquirys ,Enrollments",
+                          subtitle: "Inquires ,Enrollments",
                           icon: Icons.book,
                           color: MyColors.black,
                         ),
                         _buildGridItem(
                           context,
                           title: "Academic",
-                          subtitle: "Attendence ,Batch",
+                          subtitle: "Attendance ,Batch",
                           icon: Icons.school,
                           color: MyColors.black,
                           onTab: () {
@@ -96,13 +78,13 @@ class DashboardMobile extends StatelessWidget {
                           icon: Icons.assignment,
                           color: MyColors.black,
                         ),
-                        _buildGridItem(
-                          context,
-                          title: "Employees",
-                          subtitle: "Add Employee ,View Employee",
-                          icon: Icons.person,
-                          color: MyColors.black,
-                        ),
+                        _buildGridItem(context,
+                            title: "Employees",
+                            subtitle: "Add Employee ,View Employee",
+                            icon: Icons.person,
+                            color: MyColors.black, onTab: () {
+                          context.router.push(const EmployeeRoute());
+                        }),
                         _buildGridItem(
                           context,
                           title: "Courses",

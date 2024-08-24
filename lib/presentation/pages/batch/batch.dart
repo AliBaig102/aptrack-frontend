@@ -6,7 +6,7 @@ class Batch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyLayout(
+    return const MyLayout(
       mobileScreen: BatchMobile(),
       tabletScreen: BatchMobile(),
       desktopScreen: BatchMobile(),

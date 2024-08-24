@@ -92,13 +92,13 @@ class _LoginState extends State<Login> {
                                   fillColor: Colors.white.withOpacity(0.5),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: MyColors.grey,
                                     ),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: MyColors.grey,
                                     ),
                                   ),
@@ -116,13 +116,13 @@ class _LoginState extends State<Login> {
                                   fillColor: Colors.white.withOpacity(0.5),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: MyColors.grey,
                                     ),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: MyColors.grey,
                                     ),
                                   ),

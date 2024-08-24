@@ -1,7 +1,6 @@
 import 'package:aptrack/core/constants/my_strings.dart';
 import 'package:aptrack/core/theme/app_themes.dart';
 import 'package:aptrack/presentation/router/router_imports.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 void main() {

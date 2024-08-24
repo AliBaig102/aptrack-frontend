@@ -27,6 +27,11 @@ class MyBreadcrumb extends StatelessWidget {
           onPressed: onPressed,
           style: TextButton.styleFrom(
             overlayColor: Colors.transparent,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
             elevation: isActive ? 4 : 0,
             backgroundColor: isActive ? MyColors.white : Colors.transparent,
             shadowColor: isActive ? MyColors.black : Colors.transparent,

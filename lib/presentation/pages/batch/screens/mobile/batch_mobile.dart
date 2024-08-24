@@ -18,7 +18,7 @@ class _BatchMobileState extends State<BatchMobile> {
       isLoading = true;
     });
 
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
         students = [
@@ -55,7 +55,6 @@ class _BatchMobileState extends State<BatchMobile> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     const double minSize = MySizes.minMobileScreenSize;
 
     return ScreenUtilInit(
@@ -161,7 +160,7 @@ class _BatchMobileState extends State<BatchMobile> {
                             "Home",
                             style: TextStyle(
                               color: MyColors.black,
-                              fontSize: 16.sp,
+                              fontSize: 14.sp,
                             ),
                           ),
                           MyBreadcrumb(
@@ -170,21 +169,21 @@ class _BatchMobileState extends State<BatchMobile> {
                                   .push(const DashboardRoute());
                             },
                             title: "Dashboard",
-                            size: 16.sp,
+                            size: 14.sp,
                           ),
                           MyBreadcrumb(
                             onPressed: () {
                               return context.router.push(const AcademicRoute());
                             },
                             title: "Academic",
-                            size: 16.sp,
+                            size: 14.sp,
                           ),
                           MyBreadcrumb(
                             onPressed: () {
                               return context.router.push(const BatchRoute());
                             },
                             title: "Batch",
-                            size: 16.sp,
+                            size: 14.sp,
                             isActive: true,
                           ),
                         ],
@@ -479,7 +478,6 @@ class _ViewPopupState extends State<_ViewPopup> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        final double width = MediaQuery.of(context).size.width;
         return AlertDialog(
           title: Text(
             'View Batches',

@@ -6,6 +6,6 @@ class MyStrings {
   static const String welcomeMessage = "Welcome to $appName";
 
   static String appVersion() {
-    return "v" + "1.0.0";
+    return "v 1.0.0";
   }
 }
